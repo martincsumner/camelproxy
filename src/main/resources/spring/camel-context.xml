@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+  <!-- Define a traditional camel context here -->
+  <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+    <route id="simple-route">
+        <from uri="servlet:/myapp?matchOnUriPrefix=true"/>
+        <log message="we are here" loggingLevel="INFO"/>
+        <to uri="http4://realserverhostname:8090/myapp?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
+    </route>
+  </camelContext>
+</beans>
